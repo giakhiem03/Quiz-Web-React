@@ -19,7 +19,7 @@ function Header() {
                         <NavLink className="nav-link" to="/users">
                             Users
                         </NavLink>
-                        <NavLink className="nav-link" to="/admin">
+                        <NavLink className="nav-link" to="/admins">
                             Admin
                         </NavLink>
                     </Nav>
