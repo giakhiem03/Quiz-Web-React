@@ -15,6 +15,9 @@ function ManageUser() {
 
     const handleShow = () => setShow(true);
     const [listUser, setListUser] = useState([]);
+    const resetUpdateData = () => {
+        setDataUpdate({});
+    };
 
     useEffect(() => {
         fetchListUsers();
@@ -24,7 +27,6 @@ function ManageUser() {
             .then((res) => {
                 console.log(res);
                 if (res.EC === 0) {
-                    console.log("goi lai API", res.DT);
                     setListUser(res.DT);
                 }
             })
@@ -63,6 +65,8 @@ function ManageUser() {
                     show={showModalUpdateUser}
                     setShowModalUpdateUser={setShowModalUpdateUser}
                     dataUpdate={dataUpdate}
+                    fetchListUsers={fetchListUsers}
+                    resetUpdateData={resetUpdateData}
                 />
             </div>
         </div>

@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { CiSquarePlus } from "react-icons/ci";
 import { toast } from "react-toastify";
-import { postCreateUser } from "../../../services/apiServices";
+import { putUpdateUser } from "../../../services/apiServices";
 import _ from "lodash";
 
 function ModalUpdateUser({
@@ -11,6 +11,7 @@ function ModalUpdateUser({
     setShowModalUpdateUser,
     fetchListUsers,
     dataUpdate,
+    resetUpdateData,
 }) {
     // const [show, setShow] = useState(false);
 
@@ -22,6 +23,7 @@ function ModalUpdateUser({
         setRole("USER");
         setImage("");
         setPreviewImage("");
+        resetUpdateData();
     };
     // const handleShow = () => setShow(true);
 
@@ -60,7 +62,7 @@ function ModalUpdateUser({
     //         );
     // };
 
-    const handleSubmitCreateUser = () => {
+    const handleSubmitUpdateUser = () => {
         // let data = {
         //     email: email,
         //     password: password,
@@ -74,15 +76,10 @@ function ModalUpdateUser({
         //     return;
         // }
 
-        if (!password) {
-            toast.error("Invalid password");
-            return;
-        }
-
-        postCreateUser(email, password, username, role, image)
+        putUpdateUser(dataUpdate.id, username, role, image)
             .then((res) => {
                 if (res && res.EC === 0) {
-                    toast.success("Add succeed");
+                    toast.success("Update succeed");
                     handleClose();
                     fetchListUsers();
                 }
@@ -189,7 +186,7 @@ function ModalUpdateUser({
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleSubmitCreateUser}>
+                    <Button variant="primary" onClick={handleSubmitUpdateUser}>
                         Save
                     </Button>
                 </Modal.Footer>
