@@ -1,11 +1,42 @@
 import ModelCreateUser from "./ModalCreateUser";
 import "./ManageUser.scss";
 import { CiSquarePlus } from "react-icons/ci";
-import { useState } from "react";
 
+import TableUser from "./TableUser";
+import { useEffect, useState } from "react";
+import { getAllUsers } from "../../../services/apiServices";
+
+import { toast } from "react-toastify";
+import ModalUpdateUser from "./ModalUpdateUser";
 function ManageUser() {
     const [show, setShow] = useState(false);
+    const [showModalUpdateUser, setShowModalUpdateUser] = useState(false);
+    const [dataUpdate, setDataUpdate] = useState({});
+
     const handleShow = () => setShow(true);
+    const [listUser, setListUser] = useState([]);
+
+    useEffect(() => {
+        fetchListUsers();
+    }, []);
+    const fetchListUsers = () => {
+        getAllUsers()
+            .then((res) => {
+                console.log(res);
+                if (res.EC === 0) {
+                    console.log("goi lai API", res.DT);
+                    setListUser(res.DT);
+                }
+            })
+            .catch((error) => {
+                toast.error(error);
+            });
+    };
+
+    const handleClickBtnUpdate = (user) => {
+        setShowModalUpdateUser(true);
+        setDataUpdate(user);
+    };
 
     return (
         <div className={"manage-user-container"}>
@@ -17,8 +48,22 @@ function ManageUser() {
                         Add new users
                     </button>
                 </div>
-                <div className="table-users-container">table users</div>
-                <ModelCreateUser show={show} setShow={setShow} />
+                <div className="table-users-container">
+                    <TableUser
+                        handleClickBtnUpdate={handleClickBtnUpdate}
+                        listUser={listUser}
+                    />
+                </div>
+                <ModelCreateUser
+                    show={show}
+                    setShow={setShow}
+                    fetchListUsers={fetchListUsers}
+                />
+                <ModalUpdateUser
+                    show={showModalUpdateUser}
+                    setShowModalUpdateUser={setShowModalUpdateUser}
+                    dataUpdate={dataUpdate}
+                />
             </div>
         </div>
     );

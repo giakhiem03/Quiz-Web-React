@@ -1,15 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { CiSquarePlus } from "react-icons/ci";
 import { toast } from "react-toastify";
 import { postCreateUser } from "../../../services/apiServices";
+import _ from "lodash";
 
-function ModelCreateUser({ show, setShow, fetchListUsers }) {
+function ModalUpdateUser({
+    show,
+    setShowModalUpdateUser,
+    fetchListUsers,
+    dataUpdate,
+}) {
     // const [show, setShow] = useState(false);
 
     const handleClose = () => {
-        setShow(false);
+        setShowModalUpdateUser(false);
         setEmail("");
         setPassword("");
         setUsername("");
@@ -25,6 +31,19 @@ function ModelCreateUser({ show, setShow, fetchListUsers }) {
     const [role, setRole] = useState("USER");
     const [image, setImage] = useState("");
     const [previewImage, setPreviewImage] = useState("");
+
+    useEffect(() => {
+        if (!_.isEmpty(dataUpdate)) {
+            setEmail(dataUpdate.email);
+            setPassword(dataUpdate.password);
+            setUsername(dataUpdate.username);
+            setRole(dataUpdate.role);
+            setImage("");
+            if (dataUpdate.image) {
+                setPreviewImage(`data:image/png;base64,${dataUpdate.image}`);
+            }
+        }
+    }, [dataUpdate]);
 
     const handleUploadImage = (event) => {
         if (event.target && event.target.files && event.target.files[0]) {
@@ -90,13 +109,14 @@ function ModelCreateUser({ show, setShow, fetchListUsers }) {
                 size="xl"
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Add new users</Modal.Title>
+                    <Modal.Title>Update user</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <form className="row g-3">
                         <div className="col-md-6">
                             <label className="form-label">Email</label>
                             <input
+                                disabled
                                 value={email}
                                 type="email"
                                 className="form-control"
@@ -108,6 +128,7 @@ function ModelCreateUser({ show, setShow, fetchListUsers }) {
                         <div className="col-md-6">
                             <label className="form-label">Password</label>
                             <input
+                                disabled
                                 value={password}
                                 type="password"
                                 className="form-control"
@@ -177,4 +198,4 @@ function ModelCreateUser({ show, setShow, fetchListUsers }) {
     );
 }
 
-export default ModelCreateUser;
+export default ModalUpdateUser;
