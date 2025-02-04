@@ -12,6 +12,8 @@ function ModalUpdateUser({
     fetchListUsers,
     dataUpdate,
     resetUpdateData,
+    fetchListUsersWithPaginate,
+    currentPage,
 }) {
     // const [show, setShow] = useState(false);
 
@@ -81,7 +83,7 @@ function ModalUpdateUser({
                 if (res && res.EC === 0) {
                     toast.success("Update succeed");
                     handleClose();
-                    fetchListUsers();
+                    fetchListUsersWithPaginate(currentPage);
                 }
                 if (res && res.EC !== 0) {
                     toast.error(res.EM);
