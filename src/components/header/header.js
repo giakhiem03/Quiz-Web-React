@@ -11,6 +11,10 @@ function Header() {
         navigate("/login", { replace: true });
     };
 
+    const handleRegister = () => {
+        navigate("/register", { replace: true });
+    };
+
     return (
         <Navbar expand="lg" className="bg-body-tertiary">
             <Container>
@@ -34,7 +38,9 @@ function Header() {
                         <button className="btn-login" onClick={handleLogin}>
                             Log in
                         </button>
-                        <button className="btn-signup">Sign up</button>
+                        <button className="btn-signup" onClick={handleRegister}>
+                            Sign up
+                        </button>
                         {/* <NavDropdown title="Settings" id="basic-nav-dropdown">
                                 <NavDropdown.Item href="#action/3.1">
                                     Login

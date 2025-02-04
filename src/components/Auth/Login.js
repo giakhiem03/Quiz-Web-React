@@ -11,11 +11,11 @@ function Login() {
     const navigate = useNavigate();
 
     const handleLogin = () => {
-        console.log("vao");
         postLogin(email, password)
             .then((res) => {
                 if (res && +res.EC === 0) {
-                    toast.success("Login succeed");
+                    toast.success(res.EM);
+                    navigate("/");
                 }
                 if (res && +res.EC !== 0) {
                     toast.error(res.EM);
@@ -30,7 +30,7 @@ function Login() {
         <div className="login-container">
             <div className="header">
                 <span>Don't have an account yet?</span>
-                <button>Sign up</button>
+                <button onClick={() => navigate("/register")}>Sign up</button>
             </div>
             <div className="title col-4 mx-auto">Huynh Gia Khiem</div>
             <div className="welcome col-4 mx-auto">Hello, who's this?</div>
