@@ -13,9 +13,10 @@ import "./SideBar.scss";
 import { FaTachometerAlt, FaGem } from "react-icons/fa";
 import sidebarBg from "../../assets/bg2.png";
 import { memo } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function SideBar({ collapsed, toggled, handleToggleSidebar }) {
+    const navigate = useNavigate();
     return (
         <>
             <ProSidebar
@@ -38,7 +39,9 @@ function SideBar({ collapsed, toggled, handleToggleSidebar }) {
                             overflow: "hidden",
                             textOverflow: "ellipsis",
                             whiteSpace: "nowrap",
+                            cursor: "pointer",
                         }}
+                        onClick={() => navigate("/", { replace: true })}
                     >
                         <FaReact
                             size={"3em"}

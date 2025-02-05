@@ -1,5 +1,12 @@
 import VideoHomePage from "../../assets/video-homepage.mp4";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 function HomePage() {
+    const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+
+    const navigate = useNavigate();
+
     return (
         <div>
             <video autoPlay muted loop>
@@ -12,7 +19,15 @@ function HomePage() {
                     way to ask Body of There's the best way to ask
                 </div>
                 <div className="title-3">
-                    <button>Get's started. It's free</button>
+                    {!isAuthenticated ? (
+                        <button onClick={() => navigate("/login")}>
+                            Get's started. It's free
+                        </button>
+                    ) : (
+                        <button onClick={() => navigate("/users")}>
+                            Doing Quiz
+                        </button>
+                    )}
                 </div>
             </div>
         </div>

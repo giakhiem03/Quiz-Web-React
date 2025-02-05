@@ -1,10 +1,14 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-// import NavDropdown from "react-bootstrap/NavDropdown";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Header() {
+    const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+    const account = useSelector((state) => state.user.account);
+
     const navigate = useNavigate();
 
     const handleLogin = () => {
@@ -35,16 +39,26 @@ function Header() {
                         </NavLink>
                     </Nav>
                     <Nav>
-                        <button className="btn-login" onClick={handleLogin}>
-                            Log in
-                        </button>
-                        <button className="btn-signup" onClick={handleRegister}>
-                            Sign up
-                        </button>
-                        {/* <NavDropdown title="Settings" id="basic-nav-dropdown">
-                                <NavDropdown.Item href="#action/3.1">
-                                    Login
-                                </NavDropdown.Item>
+                        {!isAuthenticated ? (
+                            <>
+                                <button
+                                    className="btn-login"
+                                    onClick={handleLogin}
+                                >
+                                    Log in
+                                </button>
+                                <button
+                                    className="btn-signup"
+                                    onClick={handleRegister}
+                                >
+                                    Sign up
+                                </button>
+                            </>
+                        ) : (
+                            <NavDropdown
+                                title="Settings"
+                                id="basic-nav-dropdown"
+                            >
                                 <NavDropdown.Item href="#action/3.2">
                                     Logout
                                 </NavDropdown.Item>
@@ -55,7 +69,8 @@ function Header() {
                                 <NavDropdown.Item href="#action/3.4">
                                     Separated link
                                 </NavDropdown.Item>
-                            </NavDropdown> */}
+                            </NavDropdown>
+                        )}
                     </Nav>
                 </Navbar.Collapse>
             </Container>
