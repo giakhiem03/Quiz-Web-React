@@ -31,6 +31,7 @@ function ManageUser() {
         setShowModalDeleteUser(true);
         setDataDelete(item);
     };
+
     const [listUser, setListUser] = useState([]);
     const resetUpdateData = () => {
         setDataUpdate({});

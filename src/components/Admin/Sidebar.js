@@ -72,7 +72,11 @@ function SideBar({ collapsed, toggled, handleToggleSidebar }) {
                                     Quản lý Users
                                 </Link>
                             </MenuItem>
-                            <MenuItem> Quản lý Bài Quiz</MenuItem>
+                            <MenuItem>
+                                <Link to={"/admins/manage-quizzes"}>
+                                    Quản lý bài Quiz
+                                </Link>
+                            </MenuItem>
                             <MenuItem> Quản lý câu hỏi</MenuItem>
                         </SubMenu>
                     </Menu>
