@@ -3,7 +3,9 @@ import Select from "react-select";
 import {
     getAllQuizForAdmin,
     getAllUsers,
+    postAssignQuiz,
 } from "../../../../services/apiServices";
+import { toast } from "react-toastify";
 
 function AssignQuiz() {
     const [listQuiz, setListQuiz] = useState([]);
@@ -23,7 +25,7 @@ function AssignQuiz() {
                     let newQuiz = res.DT.map((item) => {
                         return {
                             value: item.id,
-                            label: `${item.id} - ${item.description}`,
+                            label: `${item.id} - ${item.name}`,
                         };
                     });
                     setListQuiz(newQuiz);
@@ -33,6 +35,7 @@ function AssignQuiz() {
                 console.log("error catch:", error);
             });
     };
+
     const fetchUsers = () => {
         getAllUsers()
             .then((res) => {
@@ -50,6 +53,21 @@ function AssignQuiz() {
                 console.log("error catch:", error);
             });
     };
+
+    const handleAssign = () => {
+        postAssignQuiz(selectedQuiz.value, selectedUser.value)
+            .then((res) => {
+                if (res && res.EC === 0) {
+                    toast.success(res.EM);
+                } else {
+                    toast.error(res.EM);
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
     return (
         <div className="assign-quiz-container row">
             <div className="col-6 form-group ">
@@ -71,7 +89,12 @@ function AssignQuiz() {
                 />
             </div>
             <div>
-                <button className="btn btn-warning mt-3">Assign</button>
+                <button
+                    className="btn btn-warning mt-3"
+                    onClick={() => handleAssign()}
+                >
+                    Assign
+                </button>
             </div>
         </div>
     );
