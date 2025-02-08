@@ -94,7 +94,6 @@ function DetailQuiz() {
             payload.answers = answers;
             postAnswers(payload)
                 .then((res) => {
-                    console.log(res);
                     if (res && res.EC === 0) {
                         setIsShowModalResult(true);
                         setDataModalResult({

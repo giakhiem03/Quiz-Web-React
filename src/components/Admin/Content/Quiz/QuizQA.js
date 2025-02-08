@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Select from "react-select";
-import "./Questions.scss";
+import "./QuizQA.scss";
 import { CiSquareMinus, CiSquarePlus } from "react-icons/ci";
 import { LuImagePlus } from "react-icons/lu";
 import { v4 as uuidv4 } from "uuid";
@@ -13,7 +13,7 @@ import {
 } from "../../../../services/apiServices";
 import { toast } from "react-toastify";
 
-function Questions() {
+function QuizQA() {
     const initQuestions = [
         {
             id: uuidv4(),
@@ -243,8 +243,6 @@ function Questions() {
 
     return (
         <div className="questions-container">
-            <div className="title">Manage Questions</div>
-            <hr />
             <div className="add-new-question">
                 <div className="col-6 form-group">
                     <label className="mb-2">Select Quiz:</label>
@@ -422,4 +420,4 @@ function Questions() {
     );
 }
 
-export default Questions;
+export default QuizQA;
