@@ -7,6 +7,7 @@ import "./DetailQuiz.scss";
 import Question from "./Question";
 import { postAnswers } from "../../services/apiServices";
 import ModalResult from "./ModalResult";
+import RightContent from "./Content/RightContent";
 
 function DetailQuiz() {
     const { id } = useParams();
@@ -165,7 +166,12 @@ function DetailQuiz() {
                     </button>
                 </div>
             </div>
-            <div className="right-content">Right </div>
+            <div className="right-content">
+                <RightContent
+                    dataQuiz={quiz}
+                    handleFinishQuiz={handleFinishQuiz}
+                />
+            </div>
             <ModalResult
                 dataModalResult={dataModalResult}
                 show={isShowModalResult}
