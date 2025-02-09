@@ -170,6 +170,7 @@ function DetailQuiz() {
                 <RightContent
                     dataQuiz={quiz}
                     handleFinishQuiz={handleFinishQuiz}
+                    setIndex={setIndex}
                 />
             </div>
             <ModalResult
