@@ -3,11 +3,16 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../services/apiServices";
+import { toast } from "react-toastify";
+import { doLogout } from "../../redux/action/userAction";
+import Languages from "./Languages";
 
 function Header() {
     const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
-    // const account = useSelector((state) => state.user.account);
+    const account = useSelector((state) => state.user.account);
+    const dispatch = useDispatch();
 
     const navigate = useNavigate();
 
@@ -17,6 +22,22 @@ function Header() {
 
     const handleRegister = () => {
         navigate("/register", { replace: true });
+    };
+
+    const handleLogout = () => {
+        logout(account.email, account.refresh_token)
+            .then((res) => {
+                if (res && res.EC === 0) {
+                    dispatch(doLogout());
+                    navigate("/login");
+                    toast.success(res.EM);
+                } else {
+                    toast.error(res.EM);
+                }
+            })
+            .catch((error) => {
+                toast.error(error);
+            });
     };
 
     return (
@@ -59,18 +80,18 @@ function Header() {
                                 title="Settings"
                                 id="basic-nav-dropdown"
                             >
-                                <NavDropdown.Item href="#action/3.2">
-                                    Logout
-                                </NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.3">
                                     Profile
                                 </NavDropdown.Item>
-                                <NavDropdown.Divider />
-                                <NavDropdown.Item href="#action/3.4">
-                                    Separated link
+                                <NavDropdown.Item
+                                    href="#action/3.2"
+                                    onClick={handleLogout}
+                                >
+                                    Logout
                                 </NavDropdown.Item>
                             </NavDropdown>
                         )}
+                        <Languages />
                     </Nav>
                 </Navbar.Collapse>
             </Container>

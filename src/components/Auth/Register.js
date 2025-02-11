@@ -4,6 +4,7 @@ import "./Register.scss";
 import { toast } from "react-toastify";
 import { postRegister } from "../../services/apiServices";
 import { BiHide, BiShow } from "react-icons/bi";
+import Languages from "../header/Languages";
 
 function Register() {
     const [email, setEmail] = useState("");
@@ -39,6 +40,7 @@ function Register() {
             <div className="header">
                 <span>Already have an account?</span>
                 <button onClick={() => navigate("/login")}>Sign in</button>
+                <Languages />
             </div>
             <div className="title col-4 mx-auto">Huynh Gia Khiem</div>
             <div className="welcome col-4 mx-auto">Hello, who's this?</div>
