@@ -1,6 +1,9 @@
 import axios from "axios";
 import NProgress from "nprogress";
 import { store } from "../redux/store";
+import axiosRetry from "axios-retry";
+
+// axiosRetry(axios, { retries: 2 });
 
 NProgress.configure({
     showSpinner: false,
@@ -38,6 +41,12 @@ instance.interceptors.response.use(
         return response && response.data ? response.data : response;
     },
     function (error) {
+        //token expired
+        console.log(error.response);
+        if (error.response.data && error.response.data.EC === -999) {
+            window.location.href("/login");
+        }
+
         NProgress.done();
 
         // Any status codes that falls outside the range of 2xx cause this function to trigger

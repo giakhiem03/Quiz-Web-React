@@ -5,5 +5,59 @@
         "title3": {
             "login": "Get's started. It's free"
         }
+    },
+    "header": {
+        "home": "Home",
+        "users": "Users",
+        "admin": "Admin",
+        "quiz": "Doing Quiz",
+        "nav": {
+            "login": "Log in",
+            "signup": "Sign up",
+            "profile": "Profile",
+            "logout": "Logout",
+            "settings": "Settings"
+        }
+    },
+    "quiz": {
+        "title1": "Có rất nhiều cách để hỏi...",
+        "title2": "Không biết thì google",
+        "title3": {
+            "login": "Bắt đầu ngay. Hoàn toàn miễn phí",
+            "doing": "Doing Quiz Now"
+        }
+    },
+    "sidebar": {
+        "dashboard": "Dashboard",
+        "manageUsers": "Manage Users",
+        "manageQuiz": "Manage Quiz",
+        "manageQuestion": "Manage Question",
+        "features": "Features",
+        "title3": {
+            "login": "Bắt đầu ngay. Hoàn toàn miễn phí",
+            "doing": "Doing Quiz Now"
+        }
+    },
+    "login": {
+        "question": "Don't have an account yet?",
+        "signup": "Sign up",
+        "title": "Huynh Gia Khiem",
+        "hello": "Hello, who's this?",
+        "email": "Email",
+        "password": "Password",
+        "login": "Login to HoiDanIT",
+        "forgotPW": "Forgot password ?",
+        "goHomePage": "Go to HomePage"
+    },
+    "register": {
+        "question": "Already have an account?",
+        "signin": "Sign in",
+        "title": "Huynh Gia Khiem",
+        "hello": "Hello, who's this?",
+        "email": "Email",
+        "username": "Username",
+        "password": "Password",
+        "register": "Register",
+        "goHomePage": "Go to HomePage"
     }
 }

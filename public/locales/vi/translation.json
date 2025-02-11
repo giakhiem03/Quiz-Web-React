@@ -3,7 +3,62 @@
         "title1": "Có rất nhiều cách để hỏi...",
         "title2": "Không biết thì google",
         "title3": {
-            "login": "Hãy bắt đầu. Vì nó miễn phí"
+            "login": "Bắt đầu ngay. Hoàn toàn miễn phí",
+            "doing": "Doing Quiz Now"
         }
+    },
+    "header": {
+        "home": "Trang chủ",
+        "users": "Người dùng",
+        "admin": "Admin",
+        "quiz": "Làm bài Quiz",
+        "nav": {
+            "login": "Đăng nhập",
+            "signup": "Đăng ký",
+            "profile": "Hồ sơ",
+            "logout": "Đăng xuất",
+            "settings": "Cài đặt"
+        }
+    },
+    "quiz": {
+        "title1": "Có rất nhiều cách để hỏi...",
+        "title2": "Không biết thì google",
+        "title3": {
+            "login": "Bắt đầu ngay. Hoàn toàn miễn phí",
+            "doing": "Doing Quiz Now"
+        }
+    },
+    "sidebar": {
+        "dashboard": "Bảng điều khiển",
+        "manageUsers": "Quản lý người dùng",
+        "manageQuiz": "Quản lý bài Quiz",
+        "manageQuestion": "Quản lý câu hỏi",
+        "features": "Tính năng",
+        "title3": {
+            "login": "Bắt đầu ngay. Hoàn toàn miễn phí",
+            "doing": "Doing Quiz Now"
+        }
+    },
+    "login": {
+        "question": "Bạn chưa có tài khoản?",
+        "signup": "Đăng ký",
+        "title": "Huynh Gia Khiem",
+        "hello": "Xin chào, Bạn là ai",
+        "email": "Email",
+        "password": "Mật khẩu",
+        "login": "Đăng nhập",
+        "forgotPW": "Quên mật khẩu ?",
+        "goHomePage": "Trở về trang chủ"
+    },
+    "register": {
+        "question": "Bạn đã có tài khoản?",
+        "signin": "Đăng nhập",
+        "title": "Huynh Gia Khiem",
+        "hello": "Xin chào, Bạn là ai",
+        "email": "Email",
+        "username": "Tên tài khoản",
+        "password": "Mật khẩu",
+        "register": "Đăng ký",
+        "goHomePage": "Trở về trang chủ"
     }
 }

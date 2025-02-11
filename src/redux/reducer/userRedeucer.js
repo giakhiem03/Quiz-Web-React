@@ -1,6 +1,7 @@
 import {
     FETCH_USER_LOGIN_SUCCESS,
     USER_LOGOUT_SUCCESS,
+    UPDATE_USER_SUCCESS,
 } from "../action/userAction";
 
 const INITIAL_STATE = {
@@ -32,6 +33,15 @@ function userReducer(state = INITIAL_STATE, action) {
             };
         case USER_LOGOUT_SUCCESS:
             return INITIAL_STATE;
+        case UPDATE_USER_SUCCESS:
+            return {
+                ...state,
+                account: {
+                    ...state.account,
+                    username: action?.payload?.username,
+                    image: action?.payload?.image,
+                },
+            };
         default:
             console.log("default value error!");
             return state;

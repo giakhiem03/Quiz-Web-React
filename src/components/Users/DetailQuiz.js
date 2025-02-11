@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, NavLink } from "react-router-dom";
 import { getQuizById } from "../../services/apiServices";
 import { toast } from "react-toastify";
 import _ from "lodash";
@@ -8,6 +8,8 @@ import Question from "./Question";
 import { postAnswers } from "../../services/apiServices";
 import ModalResult from "./ModalResult";
 import RightContent from "./Content/RightContent";
+import Breadcrumb from "react-bootstrap/Breadcrumb";
+import { useTranslation } from "react-i18next";
 
 function DetailQuiz() {
     const { id } = useParams();
@@ -41,6 +43,9 @@ function DetailQuiz() {
                                 item.answers.isSelected = false;
                                 answers.push(item.answers);
                             });
+
+                            answers = _.orderBy(answers, ["id"], ["asc"]);
+
                             return {
                                 questionId: key,
                                 answers,
@@ -133,52 +138,70 @@ function DetailQuiz() {
             setQuiz(dataQuizClone);
         }
     };
+    const { t, i18n } = useTranslation();
 
     return (
-        <div className="detail-quiz-container">
-            <div className="left-content">
-                <div className="title">
-                    Quiz {id}: {state?.quizTitle}
-                    <hr />
+        <>
+            <Breadcrumb className="quiz-detail-new-header">
+                <NavLink to={"/"} className={"breadcrumb-item"}>
+                    {t("header.home")}
+                </NavLink>
+                <NavLink to={"/users"} className={"breadcrumb-item"}>
+                    {t("header.users")}
+                </NavLink>
+                <Breadcrumb.Item active>{t("header.quiz")}</Breadcrumb.Item>
+            </Breadcrumb>
+            <div className="detail-quiz-container">
+                <div className="left-content">
+                    <div className="title">
+                        Quiz {id}: {state?.quizTitle}
+                        <hr />
+                    </div>
+                    <div className="q-body">
+                        <img src="" alt="" />
+                    </div>
+                    <div className="q-content">
+                        <Question
+                            index={index}
+                            data={quiz && quiz.length > 0 ? quiz[index] : []}
+                            handleCheckBoxData={handleCheckBoxData}
+                        />
+                    </div>
+                    <div className="footer">
+                        <button
+                            className="btn btn-secondary"
+                            onClick={handlePrev}
+                        >
+                            Prev
+                        </button>
+                        <button
+                            className="btn btn-primary"
+                            onClick={handleNext}
+                        >
+                            Next
+                        </button>
+                        <button
+                            className="btn btn-warning"
+                            onClick={handleFinishQuiz}
+                        >
+                            Finish
+                        </button>
+                    </div>
                 </div>
-                <div className="q-body">
-                    <img src="" alt="" />
-                </div>
-                <div className="q-content">
-                    <Question
-                        index={index}
-                        data={quiz && quiz.length > 0 ? quiz[index] : []}
-                        handleCheckBoxData={handleCheckBoxData}
+                <div className="right-content">
+                    <RightContent
+                        dataQuiz={quiz}
+                        handleFinishQuiz={handleFinishQuiz}
+                        setIndex={setIndex}
                     />
                 </div>
-                <div className="footer">
-                    <button className="btn btn-secondary" onClick={handlePrev}>
-                        Prev
-                    </button>
-                    <button className="btn btn-primary" onClick={handleNext}>
-                        Next
-                    </button>
-                    <button
-                        className="btn btn-warning"
-                        onClick={handleFinishQuiz}
-                    >
-                        Finish
-                    </button>
-                </div>
-            </div>
-            <div className="right-content">
-                <RightContent
-                    dataQuiz={quiz}
-                    handleFinishQuiz={handleFinishQuiz}
-                    setIndex={setIndex}
+                <ModalResult
+                    dataModalResult={dataModalResult}
+                    show={isShowModalResult}
+                    setShow={setIsShowModalResult}
                 />
             </div>
-            <ModalResult
-                dataModalResult={dataModalResult}
-                show={isShowModalResult}
-                setShow={setIsShowModalResult}
-            />
-        </div>
+        </>
     );
 }
 

@@ -14,9 +14,12 @@ import { FaTachometerAlt, FaGem } from "react-icons/fa";
 import sidebarBg from "../../assets/bg2.png";
 import { memo } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function SideBar({ collapsed, toggled, handleToggleSidebar }) {
     const navigate = useNavigate();
+    const { t, i18n } = useTranslation();
+    // {t("register.goHomePage")}
     return (
         <>
             <ProSidebar
@@ -58,28 +61,28 @@ function SideBar({ collapsed, toggled, handleToggleSidebar }) {
                             icon={<FaTachometerAlt />}
                             // suffix={<span className="badge red">New</span>}
                         >
-                            <Link to={"/admins"}>Dashboard</Link>
+                            <Link to={"/admins"}>{t("sidebar.dashboard")}</Link>
                         </MenuItem>
                     </Menu>
                     <Menu iconShape="circle">
                         <SubMenu
                             // suffix={<span className="badge yellow">3</span>}
                             icon={<FaGem />}
-                            title={"Features"}
+                            title={t("sidebar.features")}
                         >
                             <MenuItem>
                                 <Link to={"/admins/manage-users"}>
-                                    Quản lý Users
+                                    {t("sidebar.manageUsers")}
                                 </Link>
                             </MenuItem>
                             <MenuItem>
                                 <Link to={"/admins/manage-quizzes"}>
-                                    Quản lý bài Quiz
+                                    {t("sidebar.manageQuiz")}
                                 </Link>
                             </MenuItem>
                             <MenuItem>
                                 <Link to={"/admins/manage-questions"}>
-                                    Quản lý câu hỏi
+                                    {t("sidebar.manageQuestion")}
                                 </Link>
                             </MenuItem>
                         </SubMenu>

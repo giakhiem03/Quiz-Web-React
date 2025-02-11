@@ -8,12 +8,17 @@ import { logout } from "../../services/apiServices";
 import { toast } from "react-toastify";
 import { doLogout } from "../../redux/action/userAction";
 import Languages from "./Languages";
+import { useTranslation } from "react-i18next";
+import { FaReact } from "react-icons/fa";
+import Profile from "./Profile";
+import { useState } from "react";
 
 function Header() {
     const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
     const account = useSelector((state) => state.user.account);
     const dispatch = useDispatch();
-
+    const { t, i18n } = useTranslation();
+    const [showModalProfile, setShowModalProfile] = useState(false);
     const navigate = useNavigate();
 
     const handleLogin = () => {
@@ -41,61 +46,72 @@ function Header() {
     };
 
     return (
-        <Navbar expand="lg" className="bg-body-tertiary">
-            <Container>
-                <NavLink className="navbar-brand" to="/">
-                    GiaKhiem
-                </NavLink>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto">
-                        <NavLink className="nav-link" to="/">
-                            Home
-                        </NavLink>
-                        <NavLink className="nav-link" to="/users">
-                            Users
-                        </NavLink>
-                        <NavLink className="nav-link" to="/admins">
-                            Admin
-                        </NavLink>
-                    </Nav>
-                    <Nav>
-                        {!isAuthenticated ? (
-                            <>
-                                <button
-                                    className="btn-login"
-                                    onClick={handleLogin}
+        <>
+            <Navbar expand="lg" className="bg-body-tertiary">
+                <Container>
+                    <NavLink className="navbar-brand" to="/">
+                        <FaReact className="brand-icon" />
+                        GiaKhiem
+                    </NavLink>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="me-auto">
+                            <NavLink className="nav-link" to="/">
+                                {t("header.home")}
+                            </NavLink>
+                            <NavLink className="nav-link" to="/users">
+                                {t("header.users")}
+                            </NavLink>
+                            <NavLink className="nav-link" to="/admins">
+                                {t("header.admin")}
+                            </NavLink>
+                        </Nav>
+                        <Nav>
+                            {!isAuthenticated ? (
+                                <>
+                                    <button
+                                        className="btn-login"
+                                        onClick={handleLogin}
+                                    >
+                                        {t("header.nav.login")}
+                                    </button>
+                                    <button
+                                        className="btn-signup"
+                                        onClick={handleRegister}
+                                    >
+                                        {t("header.nav.signup")}
+                                    </button>
+                                </>
+                            ) : (
+                                <NavDropdown
+                                    title={t("header.nav.settings")}
+                                    id="basic-nav-dropdown"
                                 >
-                                    Log in
-                                </button>
-                                <button
-                                    className="btn-signup"
-                                    onClick={handleRegister}
-                                >
-                                    Sign up
-                                </button>
-                            </>
-                        ) : (
-                            <NavDropdown
-                                title="Settings"
-                                id="basic-nav-dropdown"
-                            >
-                                <NavDropdown.Item href="#action/3.3">
-                                    Profile
-                                </NavDropdown.Item>
-                                <NavDropdown.Item
-                                    href="#action/3.2"
-                                    onClick={handleLogout}
-                                >
-                                    Logout
-                                </NavDropdown.Item>
-                            </NavDropdown>
-                        )}
-                        <Languages />
-                    </Nav>
-                </Navbar.Collapse>
-            </Container>
-        </Navbar>
+                                    <NavDropdown.Item
+                                        onClick={() =>
+                                            setShowModalProfile(true)
+                                        }
+                                    >
+                                        {t("header.nav.profile")}
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item
+                                        href="#action/3.2"
+                                        onClick={handleLogout}
+                                    >
+                                        {t("header.nav.logout")}
+                                    </NavDropdown.Item>
+                                </NavDropdown>
+                            )}
+                            <Languages />
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
+            <Profile
+                showModalProfile={showModalProfile}
+                setShowModalProfile={setShowModalProfile}
+            />
+        </>
     );
 }
 

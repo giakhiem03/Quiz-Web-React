@@ -23,7 +23,7 @@ function HomePage() {
                         </button>
                     ) : (
                         <button onClick={() => navigate("/users")}>
-                            Doing Quiz
+                            {t("homepage.title3.doing")}
                         </button>
                     )}
                 </div>

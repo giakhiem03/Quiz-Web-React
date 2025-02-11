@@ -5,11 +5,13 @@ import { toast } from "react-toastify";
 import { postRegister } from "../../services/apiServices";
 import { BiHide, BiShow } from "react-icons/bi";
 import Languages from "../header/Languages";
+import { useTranslation } from "react-i18next";
 
 function Register() {
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const { t, i18n } = useTranslation();
 
     const [showPassword, setShowPassword] = useState(false);
 
@@ -38,22 +40,24 @@ function Register() {
     return (
         <div className="login-container">
             <div className="header">
-                <span>Already have an account?</span>
-                <button onClick={() => navigate("/login")}>Sign in</button>
+                <span>{t("register.question")}</span>
+                <button onClick={() => navigate("/login")}>
+                    {t("register.signin")}
+                </button>
                 <Languages />
             </div>
             <div className="title col-4 mx-auto">Huynh Gia Khiem</div>
-            <div className="welcome col-4 mx-auto">Hello, who's this?</div>
+            <div className="welcome col-4 mx-auto"> {t("register.hello")}</div>
             <div className="content-form col-4 mx-auto">
                 <div className="form-group">
-                    <label>Email</label>
+                    <label> {t("register.email")}</label>
                     <input
                         value={email}
                         type="email"
                         className="form-control"
                         onChange={(e) => setEmail(e.target.value)}
                     />
-                    <label>Username</label>
+                    <label> {t("register.username")}</label>
                     <input
                         value={username}
                         type="text"
@@ -61,7 +65,7 @@ function Register() {
                         onChange={(e) => setUsername(e.target.value)}
                     />
                     <div className="position-relative">
-                        <label>Password</label>
+                        <label> {t("register.password")}</label>
                         {showPassword ? (
                             <>
                                 <input
@@ -98,7 +102,7 @@ function Register() {
 
                     <div>
                         <button className="btn-submit" onClick={handleLogin}>
-                            Register to HoiDanIT
+                            {t("register.register")}
                         </button>
                     </div>
                     <div className="text-center">
@@ -106,7 +110,7 @@ function Register() {
                             className="back"
                             onClick={() => navigate("/", { replace: true })}
                         >
-                            &lt;&lt; Go to HomePage
+                            &lt;&lt; {t("register.goHomePage")}
                         </span>
                     </div>
                 </div>

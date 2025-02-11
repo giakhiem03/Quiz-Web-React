@@ -7,11 +7,12 @@ import { useDispatch } from "react-redux";
 import { doLogin } from "../../redux/action/userAction";
 import { ImSpinner9 } from "react-icons/im";
 import Languages from "../header/Languages";
-
+import { useTranslation } from "react-i18next";
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const { t, i18n } = useTranslation();
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -51,22 +52,24 @@ function Login() {
     return (
         <div className="login-container">
             <div className="header">
-                <span>Don't have an account yet?</span>
-                <button onClick={() => navigate("/register")}>Sign up</button>
+                <span>{t("login.question")}</span>
+                <button onClick={() => navigate("/register")}>
+                    {t("login.signup")}
+                </button>
                 <Languages />
             </div>
             <div className="title col-4 mx-auto">Huynh Gia Khiem</div>
-            <div className="welcome col-4 mx-auto">Hello, who's this?</div>
+            <div className="welcome col-4 mx-auto">{t("login.hello")}</div>
             <div className="content-form col-4 mx-auto">
                 <div className="form-group">
-                    <label>Email</label>
+                    <label>{t("login.email")}</label>
                     <input
                         value={email}
                         type="email"
                         className="form-control"
                         onChange={(e) => setEmail(e.target.value)}
                     />
-                    <label>Password</label>
+                    <label>{t("login.password")}</label>
                     <input
                         value={password}
                         type="password"
@@ -74,7 +77,9 @@ function Login() {
                         onChange={(e) => setPassword(e.target.value)}
                         onKeyDown={(e) => handleKeyDown(e)}
                     />
-                    <span className="forgot-password">Forgot password ?</span>
+                    <span className="forgot-password">
+                        {t("login.forgotPW")}
+                    </span>
                     <div>
                         <button
                             className="btn-submit"
@@ -84,7 +89,7 @@ function Login() {
                             {isLoading && (
                                 <ImSpinner9 className="loaderIcons" />
                             )}
-                            Login to HoiDanIT
+                            {t("login.login")}
                         </button>
                     </div>
                     <div className="text-center">
@@ -92,7 +97,7 @@ function Login() {
                             className="back"
                             onClick={() => navigate("/", { replace: true })}
                         >
-                            &lt;&lt; Go to HomePage
+                            &lt;&lt; {t("login.goHomePage")}
                         </span>
                     </div>
                 </div>
